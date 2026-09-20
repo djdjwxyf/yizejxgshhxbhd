@@ -1,0 +1,202 @@
+/* ============================================================
+ * 今日爱情故事 · 样式
+ * 配色沿用博客原本的粉色系（#f7cac9 / #d47b7b / #8b5e5e）
+ * ============================================================ */
+
+.love-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 6px 4px 34px;
+}
+
+.love-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.love-date {
+  font-size: 13px;
+  color: #a8838a;
+  letter-spacing: .6px;
+}
+
+.love-badge {
+  font-size: 12px;
+  line-height: 1;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #fbeaf0;
+  color: #993556;
+  border: 1px solid #f4c0d1;
+}
+
+.love-badge.hot {
+  background: #f7cac9;
+  color: #71243e;
+  border-color: #ed93b1;
+}
+
+.love-card {
+  background: #fff;
+  border: 1px solid #f7e3e6;
+  border-radius: 16px;
+  padding: 30px 34px 34px;
+  min-height: 280px;
+  box-shadow: 0 6px 24px rgba(212, 123, 123, .10);
+}
+
+.love-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #d47b7b;
+  letter-spacing: 1px;
+  margin: 0 0 22px;
+  min-height: 32px;
+  line-height: 1.4;
+}
+
+.love-title::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 18px;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: #f7cac9;
+  animation: love-caret 1s step-end infinite;
+}
+
+.love-title.done::after {
+  display: none;
+}
+
+.love-body p {
+  font-size: 15px;
+  line-height: 2;
+  color: #8b5e5e;
+  margin: 0 0 15px;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.love-body p:last-child {
+  margin-bottom: 0;
+}
+
+.love-body p.show {
+  animation: love-fade .7s ease forwards;
+}
+
+@keyframes love-caret {
+  50% { opacity: 0; }
+}
+
+@keyframes love-fade {
+  to { opacity: 1; transform: none; }
+}
+
+.love-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 18px 2px 0;
+  font-size: 12.5px;
+  color: #a8838a;
+}
+
+.love-bar {
+  flex: 1 1 120px;
+  min-width: 90px;
+  height: 6px;
+  border-radius: 99px;
+  background: #f7e3e6;
+  overflow: hidden;
+}
+
+.love-bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #f7cac9, #d47b7b);
+  transition: width .6s ease;
+}
+
+.love-tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.love-tool {
+  font-size: 12.5px;
+  color: #a8838a;
+  background: #fff;
+  border: 1px solid #f7e3e6;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.love-tool:hover {
+  color: #d47b7b;
+  border-color: #f7cac9;
+  transform: translateY(-1px);
+}
+
+.love-tool input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  width: 112px;
+  cursor: pointer;
+}
+
+.love-empty {
+  color: #a8838a;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* 夜间模式 */
+[data-theme='dark'] .love-card {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  box-shadow: none;
+}
+
+[data-theme='dark'] .love-body p {
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .love-tool {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+}
+
+[data-theme='dark'] .love-bar {
+  background: #2f2f2f;
+}
+
+@media (max-width: 768px) {
+  .love-card {
+    padding: 22px 18px 26px;
+    border-radius: 14px;
+    min-height: 220px;
+  }
+  .love-title {
+    font-size: 19px;
+  }
+  .love-body p {
+    font-size: 14.5px;
+    line-height: 1.95;
+  }
+}
