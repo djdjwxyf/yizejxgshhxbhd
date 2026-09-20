@@ -1,0 +1,209 @@
+/* ============================================================
+ * 留言板 · 样式
+ * 配色沿用博客的粉色系（#f7cac9 / #d47b7b / #8b5e5e）
+ * Twikoo 底层用 Element Plus，所以通过覆盖 --el-* 变量改主题
+ * ============================================================ */
+
+.msg-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6px 4px 34px;
+}
+
+.msg-intro {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #a8838a;
+  text-align: center;
+  margin: 4px auto 26px;
+  max-width: 520px;
+}
+
+/* ---------- 后端未就绪时的占位 ---------- */
+
+.msg-pending {
+  text-align: center;
+  padding: 44px 20px 40px;
+  border-radius: 16px;
+  background: #fdf4f5;
+  border: 1px dashed #f4c0d1;
+  color: #a8838a;
+}
+
+.msg-pending p {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: #8b5e5e;
+}
+
+.msg-pending-sub {
+  font-size: 13px !important;
+  color: #b98b8b !important;
+  margin-bottom: 0 !important;
+}
+
+.msg-pending-heart {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 18px;
+  background: #f7cac9;
+  transform: rotate(-45deg);
+  border-radius: 0 0 4px 0;
+  position: relative;
+}
+
+.msg-pending-heart::before,
+.msg-pending-heart::after {
+  content: '';
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background: #f7cac9;
+  border-radius: 50%;
+}
+
+.msg-pending-heart::before {
+  top: -17px;
+  left: 0;
+}
+
+.msg-pending-heart::after {
+  top: 0;
+  left: 17px;
+}
+
+/* ---------- Twikoo 主题覆盖 ---------- */
+
+#msg-box {
+  --el-color-primary: #d47b7b;
+  --el-color-primary-light-3: #e0a0a0;
+  --el-color-primary-light-5: #eab8b8;
+  --el-color-primary-light-7: #f3d4d4;
+  --el-color-primary-light-8: #f7e3e6;
+  --el-color-primary-light-9: #fdf4f5;
+  --el-color-primary-dark-2: #b8666f;
+
+  --el-text-color-primary: #8b5e5e;
+  --el-text-color-regular: #a8838a;
+  --el-text-color-secondary: #b98b8b;
+  --el-text-color-placeholder: #c9a3a3;
+
+  --el-border-color: #f7e3e6;
+  --el-border-color-light: #f7e3e6;
+  --el-border-color-lighter: #f7e3e6;
+  --el-border-color-extra-light: #fdf4f5;
+
+  --el-fill-color-blank: #fff;
+  --el-bg-color: #fff;
+  --el-bg-color-overlay: #fff;
+
+  font-family: inherit;
+}
+
+#msg-box .tk-comments-title,
+#msg-box .tk-comments-count,
+#msg-box .tk-comment .tk-nick {
+  color: #8b5e5e;
+}
+
+#msg-box .tk-content {
+  color: #8b5e5e;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+#msg-box .tk-time,
+#msg-box .tk-replies-expand,
+#msg-box .tk-action-icon {
+  color: #c9a3a3;
+}
+
+#msg-box .tk-submit .el-textarea__inner,
+#msg-box .tk-submit .el-input__inner {
+  border-radius: 10px;
+}
+
+#msg-box .tk-comment {
+  transition: none;
+}
+
+#msg-box .tk-avatar,
+#msg-box .tk-avatar-img {
+  border-radius: 50%;
+}
+
+#msg-box .el-button {
+  border-radius: 999px;
+  font-weight: 400;
+}
+
+#msg-box .el-button--primary {
+  background-color: #d47b7b;
+  border-color: #d47b7b;
+}
+
+#msg-box .el-button--primary:hover {
+  background-color: #e0a0a0;
+  border-color: #e0a0a0;
+}
+
+#msg-box .tk-comments .tk-content a {
+  color: #d47b7b;
+}
+
+/* ---------- 夜间模式 ---------- */
+
+[data-theme='dark'] .msg-pending {
+  background: #2a2123;
+  border-color: #4b3639;
+}
+
+[data-theme='dark'] .msg-pending p {
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .msg-pending-heart,
+[data-theme='dark'] .msg-pending-heart::before,
+[data-theme='dark'] .msg-pending-heart::after {
+  background: #6b4a4f;
+}
+
+[data-theme='dark'] #msg-box {
+  --el-color-primary: #e5a0a0;
+  --el-color-primary-dark-2: #f2b4bb;
+  --el-text-color-primary: #c8a9ae;
+  --el-text-color-regular: #a8838a;
+  --el-text-color-secondary: #a8838a;
+  --el-text-color-placeholder: #7d6266;
+
+  --el-border-color: #2f2f2f;
+  --el-border-color-light: #2f2f2f;
+  --el-border-color-lighter: #2f2f2f;
+  --el-border-color-extra-light: #262626;
+
+  --el-fill-color-blank: #1f1f1f;
+  --el-bg-color: #1f1f1f;
+  --el-bg-color-overlay: #262626;
+}
+
+[data-theme='dark'] #msg-box .tk-comments-title,
+[data-theme='dark'] #msg-box .tk-comments-count,
+[data-theme='dark'] #msg-box .tk-comment .tk-nick,
+[data-theme='dark'] #msg-box .tk-content {
+  color: #c8a9ae;
+}
+
+/* ---------- 手机端 ---------- */
+
+@media (max-width: 768px) {
+  .msg-intro {
+    font-size: 13.5px;
+    margin-bottom: 20px;
+  }
+  .msg-pending {
+    padding: 34px 16px 30px;
+  }
+  #msg-box .tk-content {
+    font-size: 13.5px;
+  }
+}

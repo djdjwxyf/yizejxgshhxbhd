@@ -1,0 +1,314 @@
+/* ============================================================
+ * 大事记 · 样式
+ * 配色沿用博客的粉色系（#f7cac9 / #d47b7b / #8b5e5e）
+ * ============================================================ */
+
+.tl-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6px 4px 34px;
+}
+
+/* ---------- 顶部概览 ---------- */
+
+.tl-summary {
+  text-align: center;
+  padding: 26px 20px 22px;
+  margin-bottom: 34px;
+  border-radius: 16px;
+  background: #fdf4f5;
+  border: 1px solid #f7e3e6;
+  box-shadow: 0 6px 24px rgba(212, 123, 123, .10);
+}
+
+.tl-summary-line {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #b98b8b;
+}
+
+.tl-summary-days {
+  font-size: 56px;
+  line-height: 1.1;
+  font-weight: 500;
+  color: #c9686f;
+  margin: 8px 0 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 时间轴主体 ---------- */
+
+.tl-track {
+  position: relative;
+  padding-left: 34px;
+}
+
+/* 竖线 */
+.tl-track::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: #f7e3e6;
+  border-radius: 2px;
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 26px;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-node {
+  position: absolute;
+  left: -34px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #f7cac9;
+  box-sizing: border-box;
+}
+
+.tl-item-future .tl-node {
+  border-color: #e7d3d6;
+  border-style: dashed;
+}
+
+.tl-node-end {
+  border-color: #f7e3e6;
+  background: #f7e3e6;
+  border-width: 3px;
+}
+
+.tl-card {
+  background: #fff;
+  border: 1px solid #f7e3e6;
+  border-radius: 14px;
+  padding: 16px 20px 15px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.tl-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 123, 123, .12);
+}
+
+.tl-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.tl-date {
+  font-size: 15px;
+  font-weight: 500;
+  color: #d47b7b;
+  font-variant-numeric: tabular-nums;
+}
+
+.tl-year {
+  font-size: 12px;
+  color: #c9a3a3;
+}
+
+.tl-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: #8b5e5e;
+  letter-spacing: .5px;
+  margin-bottom: 6px;
+}
+
+.tl-text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #a8838a;
+}
+
+.tl-badge {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11.5px;
+  line-height: 1;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fbeaf0;
+  color: #993556;
+  border: 1px solid #f4c0d1;
+}
+
+.tl-item-future .tl-badge {
+  background: #f5f2f2;
+  color: #a8838a;
+  border-color: #e7d3d6;
+}
+
+.tl-end {
+  font-size: 13px;
+  color: #c9a3a3;
+  letter-spacing: 2px;
+  padding-top: 2px;
+}
+
+/* ---------- 接下来 ---------- */
+
+.tl-upcoming {
+  margin-top: 34px;
+  padding: 20px 22px 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #f7e3e6;
+}
+
+.tl-upcoming-title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d47b7b;
+  margin-bottom: 12px;
+}
+
+.tl-upcoming-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tl-upcoming-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px dashed #f7e3e6;
+  font-size: 14px;
+}
+
+.tl-upcoming-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.tl-up-date {
+  flex: none;
+  width: 56px;
+  color: #c9a3a3;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tl-up-title {
+  flex: 1 1 auto;
+  color: #8b5e5e;
+}
+
+.tl-up-title em {
+  font-style: normal;
+  font-size: 12px;
+  color: #d47b7b;
+  margin-left: 4px;
+}
+
+.tl-up-left {
+  flex: none;
+  font-size: 12.5px;
+  color: #d47b7b;
+  white-space: nowrap;
+}
+
+.tl-empty {
+  color: #a8838a;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* ---------- 夜间模式 ---------- */
+
+[data-theme='dark'] .tl-summary,
+[data-theme='dark'] .tl-card,
+[data-theme='dark'] .tl-upcoming {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  box-shadow: none;
+}
+
+[data-theme='dark'] .tl-title,
+[data-theme='dark'] .tl-up-title {
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .tl-text {
+  color: #a8838a;
+}
+
+[data-theme='dark'] .tl-summary-days {
+  color: #f2b4bb;
+}
+
+[data-theme='dark'] .tl-date,
+[data-theme='dark'] .tl-up-left,
+[data-theme='dark'] .tl-upcoming-title {
+  color: #e5a0a0;
+}
+
+[data-theme='dark'] .tl-track::before {
+  background: #2f2f2f;
+}
+
+[data-theme='dark'] .tl-node {
+  background: #1f1f1f;
+}
+
+[data-theme='dark'] .tl-upcoming-list li {
+  border-bottom-color: #2f2f2f;
+}
+
+/* ---------- 手机端 ---------- */
+
+@media (max-width: 768px) {
+  .tl-summary {
+    padding: 20px 14px 16px;
+    margin-bottom: 26px;
+  }
+  .tl-summary-days {
+    font-size: 44px;
+  }
+  .tl-track {
+    padding-left: 28px;
+  }
+  .tl-track::before {
+    left: 5px;
+  }
+  .tl-node {
+    left: -28px;
+    width: 14px;
+    height: 14px;
+  }
+  .tl-card {
+    padding: 14px 15px 13px;
+  }
+  .tl-title {
+    font-size: 16px;
+  }
+  .tl-text {
+    font-size: 13.5px;
+  }
+  .tl-upcoming {
+    padding: 16px 15px 14px;
+  }
+  .tl-upcoming-list li {
+    gap: 8px;
+    font-size: 13.5px;
+  }
+  .tl-up-date {
+    width: 46px;
+    font-size: 12.5px;
+  }
+}
