@@ -57,7 +57,7 @@
         document.head.appendChild(link)
       }),
       addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
+        if (!true && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
         globalFn[key] = globalFn[key] || {}
         globalFn[key][name || Object.keys(globalFn[key]).length] = fn
@@ -144,7 +144,40 @@
   isHighlightShrink: false,
   isToc: false,
   pageType: 'page'
-}</script><link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pqina/flip@1.8.4/dist/flip.min.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/calendar/"><i class="fa-fw fas fa-calendar-alt"></i><span> 日历</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></div></div></div></div><div class="page type-gallery" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的小世界</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/calendar/"><i class="fa-fw fas fa-calendar-alt"></i><span> 日历</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">相册</h1></header><main class="layout" id="content-inner"><div id="page"><div class="page-title">相册</div><div class="container" id="article-container"><div class="gallery-group-main">
+}</script><link rel="stylesheet" href="/css/aplayer/APlayer.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pqina/flip@1.8.4/dist/flip.min.css"><style>
+/* 右下角悬浮音乐卡片（避开左下角的 Live2D 看板娘） */
+#music-box {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  z-index: 999;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .16);
+  transition: opacity .3s ease;
+}
+#music-box .aplayer {
+  background: transparent;
+  box-shadow: none;
+  margin: 0;
+  border-radius: 12px;
+}
+#music-box .aplayer .aplayer-body { background: transparent; }
+#music-box .aplayer .aplayer-pic { border-radius: 12px 0 0 12px; }
+#music-box .aplayer .aplayer-info { border-top: none; border-bottom: none; }
+#music-box .aplayer .aplayer-list {
+  border: none;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, .06);
+}
+#music-box .aplayer .aplayer-title { font-size: 14px; }
+@media (max-width: 768px) {
+  #music-box { width: calc(100vw - 24px); right: 12px; bottom: 12px; }
+}
+</style>
+<meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/calendar/"><i class="fa-fw fas fa-calendar-alt"></i><span> 日历</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></div></div></div></div><div class="page type-gallery" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的小世界</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/calendar/"><i class="fa-fw fas fa-calendar-alt"></i><span> 日历</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">相册</h1></header><main class="layout" id="content-inner"><div id="page"><div class="page-title">相册</div><div class="container" id="article-container"><div class="gallery-group-main">
   <figure class="gallery-group">
     <img class="gallery-group-img" src="/img/photo1.jpg" alt="我们的回忆">
     <figcaption>
@@ -181,44 +214,88 @@
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">1</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2026-04-12T04:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-14T07:27:42.867Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 婷宝</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script><script>
-window.onload = function() {
-  const ap = new APlayer({
-    container: document.createElement('div'),
-    fixed: true,
-    autoplay: false,
-    audio: [{
-      name: '一直很安静',
-      artist: '阿桑',
-      url: '/music/一直很安静.mp3'
-    }]
-  });
-};
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">1</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2026-04-12T04:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-09-20T16:25:22.450Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 婷宝</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/aplayer/APlayer.min.js"></script><script>
+(function () {
+  function initMusicPlayer() {
+    if (window.__musicInited) return;
+    if (typeof APlayer === 'undefined') {
+      console.error('[音乐播放器] APlayer 脚本未加载，请检查 /js/aplayer/APlayer.min.js');
+      return;
+    }
+    window.__musicInited = true;
+
+    var box = document.createElement('div');
+    box.id = 'music-box';
+    var inner = document.createElement('div');
+    box.appendChild(inner);
+    document.body.appendChild(box);
+
+    // 注意：不要用 fixed:true，APlayer 的固定模式会隐藏歌曲信息栏，只剩一个空条
+    window.musicPlayer = new APlayer({
+      container: inner,
+      fixed: false,
+      mini: false,
+      autoplay: false,
+      theme: '#f7cac9',
+      loop: 'all',
+      order: 'list',
+      preload: 'metadata',
+      volume: 0.6,
+      listFolded: true,
+      listMaxHeight: '180px',
+      audio: [{
+        name: '一直很安静',
+        artist: '阿桑',
+        url: '/music/一直很安静.mp3',
+        cover: '/img/butterfly-icon.png'
+      }]
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMusicPlayer);
+  } else {
+    initMusicPlayer();
+  }
+
+  // 说明：主题已开启 pjax（无刷新跳转），#music-box 挂在 body 上、不在 pjax 替换范围内，
+  // 所以切页面时播放器会一直活着，歌曲不会中断。这里【不能】在 pjax:complete 里重新初始化，
+  // 否则会多出一个播放器并让音乐从头开始。只有用户点停止/暂停才会停。
+})();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/calendar-js@1.0.2/dist/calendar.min.js"></script><script>
-document.addEventListener('DOMContentLoaded', function() {
+function initCalendarCard() {
   const asideContent = document.querySelector('#aside-content');
-  if (asideContent) {
-    const calendarCard = document.createElement('div');
-    calendarCard.className = 'card-widget card-calendar';
-    calendarCard.innerHTML = `
-      <div class="item-headline">
-        <i class="fas fa-calendar-alt"></i>
-        <span>日历</span>
-      </div>
-      <div class="calendar-container">
-        <div id="simple-calendar"></div>
-      </div>
-    `;
-    
-    const announcement = document.querySelector('.card-announcement');
-    if (announcement) {
-      announcement.parentNode.insertBefore(calendarCard, announcement.nextSibling);
-    }
-    
-    generateCalendar();
+  if (!asideContent) return;
+  // pjax 切页后侧栏会重建，这里做幂等保护，避免出现两个日历
+  if (asideContent.querySelector('.card-calendar')) return;
+  const calendarCard = document.createElement('div');
+  calendarCard.className = 'card-widget card-calendar';
+  calendarCard.innerHTML = `
+    <div class="item-headline">
+      <i class="fas fa-calendar-alt"></i>
+      <span>日历</span>
+    </div>
+    <div class="calendar-container">
+      <div id="simple-calendar"></div>
+    </div>
+  `;
+
+  const announcement = document.querySelector('.card-announcement');
+  if (announcement) {
+    announcement.parentNode.insertBefore(calendarCard, announcement.nextSibling);
   }
-});
+
+  generateCalendar();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCalendarCard);
+} else {
+  initCalendarCard();
+}
+// 主题开启 pjax 后，切页不会触发 DOMContentLoaded，需要在这里补一次
+document.addEventListener('pjax:complete', initCalendarCard);
 
 function generateCalendar() {
   const now = new Date();
@@ -327,4 +404,58 @@ function generateCalendar() {
   });
 })();
 </script>
-<script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
+<script src="/js/pjax/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
