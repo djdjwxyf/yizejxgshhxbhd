@@ -85,6 +85,49 @@
     return n;
   }
 
+  function b64enc(s) {
+    try {
+      return btoa(unescape(encodeURIComponent(s)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    } catch (e) { return ''; }
+  }
+
+  /* 把刚传上去的照片先塞进相册的本地记录里。
+     两个好处：① 相册页不用等接口就能立刻看到它们；
+     ② 万一那会儿 GitHub 接口正被限流（相册本来会报「没读到」），
+        也有东西可显示。
+     标上 partial 是为了让相册知道「这份还不全，得再去问一次」。 */
+  function seedGalleryCache(paths) {
+    if (!paths.length) return;
+
+    var list = [];
+    try {
+      var raw = localStorage.getItem(GAL_CACHE);
+      var o = raw ? JSON.parse(raw) : null;
+      if (o && o.list && o.list.length) list = o.list;
+    } catch (e) {}
+
+    var have = {};
+    for (var i = 0; i < list.length; i++) have[list[i].path] = 1;
+
+    for (var j = 0; j < paths.length; j++) {
+      var p = paths[j];
+      if (have[p]) continue;
+      var parts = String(p).split('/');
+      list.push({
+        path: p,
+        name: parts[parts.length - 1],
+        group: parts[parts.length - 2],
+        size: 0
+      });
+    }
+    list.sort(function (a, b) { return a.name < b.name ? 1 : (a.name > b.name ? -1 : 0); });
+
+    try {
+      localStorage.setItem(GAL_CACHE, JSON.stringify({ t: Date.now(), list: list, partial: true }));
+    } catch (e) {}
+  }
+
   /* ---------------- 压缩 ---------------- */
 
   function compress(file, maxSide, quality) {
@@ -320,11 +363,18 @@
       var note = document.getElementById('up-note');
       if (note) {
         if (okCount) {
-          /* 清掉相册缓存，回去时能立刻看到新照片 */
-          try { localStorage.removeItem(GAL_CACHE); } catch (e) {}
+          /* 收好这次传上去的路径：塞进相册缓存，并挂上「带清单的链接」 */
+          var paths = [];
+          for (var i = 0; i < queue.length; i++) {
+            if (queue[i].status === 'done' && queue[i].path) paths.push(queue[i].path);
+          }
+          seedGalleryCache(paths);
+          var enc = b64enc(JSON.stringify(paths));
+          var href = '/gallery/' + (enc ? '#g=' + enc : '');
+
           note.innerHTML = '<span class="up-note-ok">传上去 ' + okCount + ' 张。</span>' +
             (failCount ? '另外 ' + failCount + ' 张没成功，上面写了原因。' : '') +
-            ' <a href="/gallery/">去相册看看 →</a>';
+            ' <a href="' + href + '">去相册看看 →</a>';
         } else {
           note.innerHTML = '<span class="up-note-bad">这次都没成功。</span>' +
             (failCount ? '上面写了原因，改完再来一次。' : '');

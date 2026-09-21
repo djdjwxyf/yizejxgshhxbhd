@@ -124,6 +124,23 @@
   transform: scale(1.04);
 }
 
+/* 两个图片源都不通时：别让浏览器挂那个破图图标 */
+.gal-item.is-broken img {
+  opacity: 0;
+}
+
+.gal-item.is-broken::after {
+  content: '图片还在路上';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  letter-spacing: .5px;
+  color: #c9a3a3;
+}
+
 /* ---------- 空 / 加载状态 ---------- */
 
 .gal-grid-empty {
@@ -177,6 +194,28 @@
 
 .gal-empty-heart::before { top: -11px; left: 0; }
 .gal-empty-heart::after { left: 11px; top: 0; }
+
+/* 空态 / 读数失败时的行动按钮（可以是 button，也可以是 a） */
+.gal-retry {
+  display: inline-block;
+  margin-top: 14px;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1;
+  padding: 11px 22px;
+  border: 1px solid #f4c0d1;
+  border-radius: 999px;
+  background: #fff;
+  color: #993556 !important;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: background .18s, border-color .18s;
+}
+
+.gal-retry:hover {
+  background: #fbeaf0;
+  border-color: #e9a8c0;
+}
 
 /* ---------- 灯箱 ---------- */
 
@@ -246,6 +285,10 @@
   border-color: #2f2f2f;
 }
 
+[data-theme='dark'] .gal-item.is-broken::after {
+  color: #8f7378;
+}
+
 [data-theme='dark'] .gal-empty {
   background: #1f1f1f;
   border-color: #2f2f2f;
@@ -263,6 +306,12 @@
 [data-theme='dark'] .gal-empty-heart::before,
 [data-theme='dark'] .gal-empty-heart::after {
   background: #4a3038;
+}
+
+[data-theme='dark'] .gal-retry {
+  background: #2a2224;
+  border-color: #4a3038;
+  color: #e5a0a0 !important;
 }
 
 [data-theme='dark'] .gal-stale {
