@@ -1,0 +1,502 @@
+/* ============================================================
+ * 加照片 · 样式
+ * 这个页面主要在手机上用，所以按「手指点得到」的标准来做：
+ * 所有可点区域高度都不小于 44px。
+ * ============================================================ */
+
+.up-wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 6px 4px 40px;
+}
+
+/* ---------- 令牌面板 ---------- */
+
+.up-panel {
+  padding: 20px 22px 18px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: #fdf4f5;
+  border: 1px solid #f7e3e6;
+}
+
+.up-panel-ok {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+}
+
+.up-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d47b7b;
+}
+
+.up-ok-text {
+  flex: 1 1 auto;
+  font-size: 13.5px;
+  color: #8b5e5e;
+}
+
+.up-mini {
+  flex: none;
+  font: inherit;
+  font-size: 12.5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid #f7e3e6;
+  background: #fff;
+  color: #c9a3a3;
+  cursor: pointer;
+}
+
+.up-mini:hover {
+  color: #d47b7b;
+  border-color: #f4c0d1;
+}
+
+.up-panel-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #8b5e5e;
+  margin-bottom: 8px;
+}
+
+.up-panel-text {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #a8838a;
+}
+
+.up-token-row {
+  display: flex;
+  gap: 8px;
+}
+
+.up-token-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: inherit;
+  font-size: 13px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid #f4c0d1;
+  background: #fff;
+  color: #8b5e5e;
+  box-sizing: border-box;
+}
+
+.up-token-row input::placeholder {
+  color: #cbb6b8;
+}
+
+.up-help {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #a8838a;
+}
+
+.up-help summary {
+  cursor: pointer;
+  color: #d47b7b;
+  padding: 6px 0;
+  line-height: 1.6;
+}
+
+.up-help ol {
+  margin: 6px 0 0;
+  padding-left: 20px;
+  line-height: 2;
+}
+
+.up-help a {
+  color: #d47b7b;
+  text-decoration: underline;
+}
+
+.up-help b {
+  font-weight: 500;
+  color: #8b5e5e;
+}
+
+.up-help-warn {
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border-radius: 9px;
+  background: #fbeaf0;
+  border: 1px solid #f4c0d1;
+  color: #993556;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+/* ---------- 分组选择 ---------- */
+
+.up-group {
+  margin-bottom: 16px;
+}
+
+.up-label {
+  font-size: 13px;
+  color: #b98b8b;
+  margin-bottom: 9px;
+}
+
+.up-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.up-gchip {
+  font: inherit;
+  font-size: 13.5px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  border: 1px solid #f7e3e6;
+  background: #fff;
+  color: #a8838a;
+  cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+
+.up-gchip.is-on {
+  background: #d47b7b;
+  border-color: #d47b7b;
+  color: #fff;
+}
+
+/* ---------- 选照片 ---------- */
+
+.up-drop {
+  display: block;
+  padding: 34px 20px 30px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  border: 1.5px dashed #f0c8cc;
+  background: #fdf4f5;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+
+.up-drop:hover {
+  border-color: #d47b7b;
+  background: #fbeaf0;
+}
+
+.up-drop-icon {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 12px;
+  border-radius: 10px;
+  border: 2px solid #d47b7b;
+  position: relative;
+}
+
+.up-drop-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 2px;
+  margin: -1px 0 0 -7px;
+  background: #d47b7b;
+  border-radius: 2px;
+}
+
+.up-drop-icon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 14px;
+  margin: -7px 0 0 -1px;
+  background: #d47b7b;
+  border-radius: 2px;
+}
+
+.up-drop-main {
+  font-size: 15px;
+  font-weight: 500;
+  color: #8b5e5e;
+  margin-bottom: 5px;
+}
+
+.up-drop-sub {
+  font-size: 12.5px;
+  color: #b98b8b;
+}
+
+/* ---------- 待传列表 ---------- */
+
+.up-queue {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.up-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #f7e3e6;
+  background: #fff;
+}
+
+.up-thumb {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 9px;
+  object-fit: cover;
+  background: #fdf4f5;
+  display: block;
+}
+
+.up-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.up-name {
+  font-size: 13.5px;
+  color: #8b5e5e;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.up-meta {
+  font-size: 12px;
+  color: #b98b8b;
+  line-height: 1.5;
+}
+
+.up-badge {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #f0c8cc;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.up-item-compress .up-badge,
+.up-item-upload .up-badge {
+  border-color: #d47b7b;
+  border-top-color: transparent;
+  animation: upSpin .8s linear infinite;
+}
+
+@keyframes upSpin {
+  to { transform: rotate(360deg); }
+}
+
+.up-item-done .up-badge {
+  background: #d47b7b;
+  border-color: #d47b7b;
+}
+
+.up-item-done .up-badge::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: 0;
+  border-left: 0;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+.up-item-error .up-badge {
+  border-color: #d98b8b;
+  background: #f7dbe6;
+}
+
+.up-item-done .up-name {
+  color: #a8838a;
+}
+
+.up-item-error .up-meta {
+  color: #c9686f;
+}
+
+/* ---------- 按钮 ---------- */
+
+.up-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.up-btn {
+  font: inherit;
+  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #f4c0d1;
+  background: #fbeaf0;
+  color: #993556;
+  cursor: pointer;
+  transition: background .18s;
+}
+
+.up-btn:hover {
+  background: #f7dbe6;
+}
+
+.up-btn-main {
+  flex: 1 1 auto;
+}
+
+.up-btn-main[disabled] {
+  opacity: .6;
+  cursor: default;
+}
+
+.up-btn-quiet {
+  flex: none;
+  background: #fff;
+  border-color: #f7e3e6;
+  color: #c9a3a3;
+}
+
+.up-btn-quiet:hover {
+  background: #fdf4f5;
+  color: #d47b7b;
+}
+
+/* ---------- 结果提示 ---------- */
+
+.up-note {
+  margin-top: 16px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #a8838a;
+}
+
+.up-note a {
+  color: #d47b7b;
+}
+
+.up-note-ok {
+  color: #c9686f;
+}
+
+.up-note-bad {
+  color: #c9686f;
+}
+
+/* ---------- 夜间模式 ---------- */
+
+[data-theme='dark'] .up-panel,
+[data-theme='dark'] .up-drop {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+}
+
+[data-theme='dark'] .up-drop {
+  border-color: #4a3038;
+}
+
+[data-theme='dark'] .up-drop:hover {
+  background: #2a2224;
+}
+
+[data-theme='dark'] .up-ok-text,
+[data-theme='dark'] .up-panel-title,
+[data-theme='dark'] .up-drop-main,
+[data-theme='dark'] .up-name {
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .up-help b {
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .up-token-row input {
+  background: #151515;
+  border-color: #4a3038;
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .up-gchip {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  color: #a8838a;
+}
+
+[data-theme='dark'] .up-gchip.is-on {
+  background: #c9686f;
+  border-color: #c9686f;
+  color: #fff;
+}
+
+[data-theme='dark'] .up-item {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+}
+
+[data-theme='dark'] .up-thumb {
+  background: #2a2224;
+}
+
+[data-theme='dark'] .up-mini,
+[data-theme='dark'] .up-btn-quiet {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  color: #8f7378;
+}
+
+[data-theme='dark'] .up-btn {
+  background: #2a2224;
+  border-color: #4a3038;
+  color: #e5a0a0;
+}
+
+[data-theme='dark'] .up-help-warn {
+  background: #2a2224;
+  border-color: #4a3038;
+  color: #e5a0a0;
+}
+
+/* ---------- 手机端 ---------- */
+
+@media (max-width: 480px) {
+  .up-panel {
+    padding: 17px 16px 15px;
+  }
+  .up-token-row {
+    flex-direction: column;
+  }
+  .up-token-row input,
+  .up-token-row .up-btn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .up-drop {
+    padding: 28px 16px 24px;
+  }
+  .up-thumb {
+    width: 46px;
+    height: 46px;
+  }
+  .up-actions {
+    flex-direction: column;
+  }
+}

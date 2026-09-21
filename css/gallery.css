@@ -1,0 +1,292 @@
+/* ============================================================
+ * 相册 · 样式
+ * 配色沿用博客的粉色系（#f7cac9 / #d47b7b / #8b5e5e）
+ * ============================================================ */
+
+.gal-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 6px 4px 34px;
+}
+
+/* ---------- 工具条 ---------- */
+
+.gal-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.gal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gal-chip {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #f7e3e6;
+  background: #fff;
+  color: #a8838a;
+  cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+
+.gal-chip:hover {
+  border-color: #f4c0d1;
+  color: #d47b7b;
+}
+
+.gal-chip.is-on {
+  background: #d47b7b;
+  border-color: #d47b7b;
+  color: #fff;
+}
+
+.gal-chip b {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: .72;
+  margin-left: 3px;
+}
+
+.gal-add {
+  flex: none;
+  font-size: 13px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid #f4c0d1;
+  background: #fbeaf0;
+  color: #993556 !important;
+  white-space: nowrap;
+  transition: background .18s;
+}
+
+.gal-add:hover {
+  background: #f7dbe6;
+}
+
+/* 拿不到最新列表时的提示 */
+.gal-stale {
+  margin: -6px 0 14px;
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: #fdf4f5;
+  border: 1px solid #f7e3e6;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #b98b8b;
+}
+
+/* ---------- 照片网格 ---------- */
+
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gal-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid #f7e3e6;
+  border-radius: 12px;
+  background: #fdf4f5;
+  cursor: pointer;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.gal-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+
+.gal-item:hover {
+  transform: translateY(-2px);
+  border-color: #f0c8cc;
+  box-shadow: 0 8px 22px rgba(212, 123, 123, .14);
+}
+
+.gal-item:hover img {
+  transform: scale(1.04);
+}
+
+/* ---------- 空 / 加载状态 ---------- */
+
+.gal-grid-empty {
+  display: block;
+}
+
+.gal-loading {
+  padding: 44px 0;
+  text-align: center;
+  font-size: 13.5px;
+  color: #c9a3a3;
+}
+
+.gal-empty {
+  padding: 44px 20px 40px;
+  text-align: center;
+  border-radius: 16px;
+  background: #fdf4f5;
+  border: 1px solid #f7e3e6;
+}
+
+.gal-empty p {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: #8b5e5e;
+}
+
+.gal-empty-sub {
+  font-size: 13px !important;
+  color: #b98b8b !important;
+}
+
+.gal-empty-heart {
+  width: 22px;
+  height: 22px;
+  margin: 0 auto 14px;
+  background: #f7cac9;
+  transform: rotate(-45deg);
+  position: relative;
+}
+
+.gal-empty-heart::before,
+.gal-empty-heart::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #f7cac9;
+  border-radius: 50%;
+}
+
+.gal-empty-heart::before { top: -11px; left: 0; }
+.gal-empty-heart::after { left: 11px; top: 0; }
+
+/* ---------- 灯箱 ---------- */
+
+.gal-box {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(60, 40, 44, .88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+}
+
+.gal-box.is-on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gal-box-inner {
+  max-width: 100%;
+  max-height: 100%;
+  text-align: center;
+}
+
+.gal-box-inner img {
+  max-width: 100%;
+  max-height: calc(100vh - 110px);
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+}
+
+.gal-box-cap {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #f4dcdf;
+  letter-spacing: .5px;
+}
+
+/* ---------- 夜间模式 ---------- */
+
+[data-theme='dark'] .gal-chip {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  color: #a8838a;
+}
+
+[data-theme='dark'] .gal-chip.is-on {
+  background: #c9686f;
+  border-color: #c9686f;
+  color: #fff;
+}
+
+[data-theme='dark'] .gal-add {
+  background: #2a2224;
+  border-color: #4a3038;
+  color: #e5a0a0 !important;
+}
+
+[data-theme='dark'] .gal-item {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+}
+
+[data-theme='dark'] .gal-empty {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+}
+
+[data-theme='dark'] .gal-empty p {
+  color: #c8a9ae;
+}
+
+[data-theme='dark'] .gal-empty-sub {
+  color: #8f7378 !important;
+}
+
+[data-theme='dark'] .gal-empty-heart,
+[data-theme='dark'] .gal-empty-heart::before,
+[data-theme='dark'] .gal-empty-heart::after {
+  background: #4a3038;
+}
+
+[data-theme='dark'] .gal-stale {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  color: #8f7378;
+}
+
+/* ---------- 手机端 ---------- */
+
+@media (max-width: 768px) {
+  .gal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .gal-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .gal-add {
+    text-align: center;
+  }
+  .gal-item {
+    border-radius: 10px;
+  }
+}
