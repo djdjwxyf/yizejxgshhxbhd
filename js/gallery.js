@@ -41,7 +41,6 @@
                CFG.repo + '@' + BRANCH + '?structure=flat';
 
   var CACHE_KEY = 'love_gallery_cache_v1';
-  var CACHE_TTL = 10 * 60 * 1000;   /* 10 分钟内直接读本地，不再问接口 */
   var TOKEN_KEY = 'love_photo_token';
 
   var photos = [];
@@ -212,22 +211,24 @@
   }
 
   /* 两个源并行问，① 优先；① 不行用 ②；都不行退回缓存。
-     两个请求都很小，就等齐了再决定，逻辑最不容易出错。 */
+     两个请求都很小，就等齐了再决定，逻辑最不容易出错。
+
+     注意：本地记录只当「先垫一下」，不是最终答案 —— 每次都还是要去问一遍。
+     否则她在电脑上刚传的照片，手机要等很久才看得到。 */
+  var fetchSeq = 0;
+
   function loadList(cb) {
     var cached = readCache();
 
-    /* 记录里可能有「上传页刚塞进来、但还不全」的部分清单（partial），
-       那种必须再去问一次，不能直接当最终结果用。 */
-    var complete = cached && !cached.partial && (Date.now() - cached.t) < CACHE_TTL;
-
     if (cached) cb(cached.list, null, false, 'cache');   /* 先拿旧记录垫上，界面不空等 */
-    if (complete) return;
 
+    var mySeq = ++fetchSeq;
     var pending = 2, gh = null, jd = null, err = null;
 
     function settle() {
       pending--;
       if (pending > 0) return;
+      if (mySeq !== fetchSeq) return;   /* 期间又发起过一次，这次的结果作废 */
 
       var list = gh !== null ? gh : jd;        /* ① 权威，② 兜底 */
       if (list !== null) {
@@ -279,7 +280,10 @@
 
     el.innerHTML =
       '<div class="gal-chips">' + chips + '</div>' +
-      '<a class="gal-add" href="/upload/">＋ 加照片</a>';
+      '<div class="gal-tools">' +
+        '<button type="button" class="gal-refresh" id="gal-refresh">刷新</button>' +
+        '<a class="gal-add" href="/upload/">＋ 加照片</a>' +
+      '</div>';
   }
 
   function renderGrid() {
@@ -456,6 +460,14 @@
       return;
     }
 
+    if (t.closest('#gal-refresh')) {
+      var btn = document.getElementById('gal-refresh');
+      if (btn) { btn.disabled = true; btn.textContent = '刷新中…'; }
+      clearCache();
+      start();
+      return;
+    }
+
     var chip = t.closest('.gal-chip');
     if (chip) {
       filter = chip.getAttribute('data-g');
@@ -488,14 +500,22 @@
 
   /* ---------------- 启动 ---------------- */
 
-  function showStaleNote(msg) {
+  /* 说清楚这份清单是从哪来的 —— 免得她以为照片传丢了 */
+  function showNote(text) {
     var bar = document.getElementById('gal-bar');
     if (!bar || !bar.parentNode) return;
-    if (document.querySelector('.gal-stale')) return;
-    var n = document.createElement('div');
-    n.className = 'gal-stale';
-    n.textContent = '这会儿拿不到最新列表（' + msg + '），先看本地记住的这些。';
-    bar.parentNode.insertBefore(n, bar.nextSibling);
+    var n = document.querySelector('.gal-stale');
+    if (!n) {
+      n = document.createElement('div');
+      n.className = 'gal-stale';
+      bar.parentNode.insertBefore(n, bar.nextSibling);
+    }
+    n.textContent = text;
+  }
+
+  function hideNote() {
+    var n = document.querySelector('.gal-stale');
+    if (n && n.parentNode) n.parentNode.removeChild(n);
   }
 
   /* 上传页带回来的清单：接口通了也一起合上，
@@ -522,15 +542,27 @@
 
     loadList(function (list, err, stale, how) {
       loading = false;
+
+      var btn = document.getElementById('gal-refresh');
+      if (btn) { btn.disabled = false; btn.textContent = '刷新'; }
+
       if (!list) {
         renderBar();                 /* 工具条照画，「＋ 加照片」要能点 */
         renderFail(err);
         return;
       }
+
       photos = union(hashPhotos, list);
       renderBar();
       renderGrid();
-      if (stale && err) showStaleNote(friendly(err));
+
+      if (stale && err) {
+        showNote('这会儿拿不到最新列表（' + friendly(err) + '），先看本地记住的这些。');
+      } else if (how === 'jsdelivr') {
+        showNote('这会儿连不上 GitHub 的接口，列表可能滞后几分钟；刚传的照片过一会儿点「刷新」就会出来。');
+      } else {
+        hideNote();                  /* 拿到权威清单了，撤掉之前的提示 */
+      }
     });
   }
 

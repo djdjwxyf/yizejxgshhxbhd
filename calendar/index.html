@@ -173,8 +173,87 @@
   box-shadow: 0 -4px 12px rgba(0, 0, 0, .06);
 }
 #music-box .aplayer .aplayer-title { font-size: 14px; }
+/* 给右上角的收起按钮腾出位置，免得长歌名钻到按钮下面 */
+#music-box .aplayer .aplayer-music { padding-right: 30px; }
+#music-box .aplayer-body { position: relative; }
+
+/* 播放器右上角的「收起」按钮 */
+#music-min {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(247, 202, 201, .5);
+  color: #a8838a;
+  cursor: pointer;
+  z-index: 3;
+  transition: background .18s, color .18s;
+}
+#music-min:hover { background: #f7cac9; color: #993556; }
+#music-min svg { width: 14px; height: 14px; display: block; }
+
+/* 收起之后只剩右下角这个圆形音符按钮，点一下再展开 */
+#music-restore {
+  display: none;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: #f7cac9;
+  color: #7a3346;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(212, 123, 123, .34);
+  transition: transform .18s ease, background .18s ease;
+}
+#music-restore:hover { transform: scale(1.06); background: #f4b6c3; }
+#music-restore svg { width: 21px; height: 21px; display: block; }
+
+/* 收起了但还在放歌，就点一个小圆点提示一下 */
+@keyframes music-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(.7); opacity: .5; }
+}
+#music-restore.is-playing::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d47b7b;
+  box-shadow: 0 0 0 2px #fff;
+  animation: music-pulse 1.6s ease-in-out infinite;
+}
+
+#music-box.is-mini {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transition: width .22s ease, height .22s ease;
+}
+#music-box.is-mini .aplayer { display: none; }
+#music-box.is-mini #music-restore { display: flex; }
+
 @media (max-width: 768px) {
   #music-box { width: calc(100vw - 24px); right: 12px; bottom: 12px; }
+  #music-box.is-mini { width: 46px; height: 46px; right: 12px; bottom: 12px; }
+  /* 手机上手指粗，按钮稍微大一点 */
+  #music-min { width: 30px; height: 30px; top: 5px; right: 6px; }
+  #music-min svg { width: 16px; height: 16px; }
 }
 </style>
 <meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/love/"><i class="fa-fw fas fa-heart"></i><span> 今日故事</span></a></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fas fa-stream"></i><span> 大事记</span></a></div><div class="menus_item"><a class="site-page" href="/wishlist/"><i class="fa-fw fas fa-clipboard-list"></i><span> 心愿清单</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/calendar/"><i class="fa-fw fas fa-calendar-alt"></i><span> 日历</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></div></div></div></div><div class="page type-calendar" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">我的小世界</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/love/"><i class="fa-fw fas fa-heart"></i><span> 今日故事</span></a></div><div class="menus_item"><a class="site-page" href="/timeline/"><i class="fa-fw fas fa-stream"></i><span> 大事记</span></a></div><div class="menus_item"><a class="site-page" href="/wishlist/"><i class="fa-fw fas fa-clipboard-list"></i><span> 心愿清单</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/calendar/"><i class="fa-fw fas fa-calendar-alt"></i><span> 日历</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">日历</h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="container" id="article-container"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">婷宝</div><div class="author-info-description">欢迎来到我的空间</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://baidu.com/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://baidu.com/" target="_blank" title="baidu"><i class="fab 百度" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的空间，记录生活。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/12/hello-world/" title="小情书">小情书</a><time datetime="2026-04-11T16:00:00.000Z" title="发表于 2026-04-12 00:00:00">2026-04-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
@@ -203,7 +282,7 @@
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">1</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2026-04-12T04:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-09-21T16:33:51.814Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 婷宝</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/together.js"></script><script src="/js/aplayer/APlayer.min.js"></script><script>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">1</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2026-04-12T04:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-09-23T16:10:10.031Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 婷宝</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/together.js"></script><script src="/js/aplayer/APlayer.min.js"></script><script>
 (function () {
   function initMusicPlayer() {
     if (window.__musicInited) return;
@@ -217,6 +296,19 @@
     box.id = 'music-box';
     var inner = document.createElement('div');
     box.appendChild(inner);
+
+    // 收起之后用来恢复的圆形音符按钮
+    var ICON_MIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+    var ICON_NOTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17.5V5.6l9.5-2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.6" cy="17.6" r="2.5" fill="currentColor"/><circle cx="15.1" cy="15.6" r="2.5" fill="currentColor"/></svg>';
+
+    var restore = document.createElement('button');
+    restore.id = 'music-restore';
+    restore.type = 'button';
+    restore.title = '展开播放器';
+    restore.setAttribute('aria-label', '展开播放器');
+    restore.innerHTML = ICON_NOTE;
+    box.appendChild(restore);
+
     document.body.appendChild(box);
 
     // 注意：不要用 fixed:true，APlayer 的固定模式会隐藏歌曲信息栏，只剩一个空条
@@ -239,6 +331,44 @@
         cover: '/img/butterfly-icon.png'
       }]
     });
+
+    // 收起按钮挂在「播放器那一条」的右上角（跟着它走，歌单展开时不会被顶到歌单上方）
+    var minBtn = document.createElement('button');
+    minBtn.id = 'music-min';
+    minBtn.type = 'button';
+    minBtn.title = '收起播放器';
+    minBtn.setAttribute('aria-label', '收起播放器');
+    minBtn.innerHTML = ICON_MIN;
+    var bodyEl = box.querySelector('.aplayer-body');
+    (bodyEl || box).appendChild(minBtn);
+
+    // 收起状态记在本地：pjax 切页、刷新之后都还保持收起
+    var MINI_KEY = 'love_music_mini';
+
+    // 收起了但还在放歌，就在音符按钮上点一个小圆点
+    function markPlaying() {
+      var a = window.musicPlayer && window.musicPlayer.audio;
+      if (restore) restore.classList.toggle('is-playing', !!(a && !a.paused));
+    }
+
+    function setMini(mini) {
+      box.classList.toggle('is-mini', !!mini);
+      try { localStorage.setItem(MINI_KEY, mini ? '1' : '0'); } catch (e) {}
+      markPlaying();
+    }
+
+    minBtn.addEventListener('click', function (e) { e.stopPropagation(); setMini(true); });
+    restore.addEventListener('click', function (e) { e.stopPropagation(); setMini(false); });
+
+    if (window.musicPlayer.on) {
+      window.musicPlayer.on('play', markPlaying);
+      window.musicPlayer.on('pause', markPlaying);
+      window.musicPlayer.on('ended', markPlaying);
+    }
+
+    var savedMini = '0';
+    try { savedMini = localStorage.getItem(MINI_KEY) || '0'; } catch (e) {}
+    setMini(savedMini === '1');
   }
 
   if (document.readyState === 'loading') {

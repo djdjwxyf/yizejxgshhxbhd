@@ -72,6 +72,36 @@
   background: #f7dbe6;
 }
 
+.gal-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+.gal-refresh {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid #f7e3e6;
+  background: #fff;
+  color: #a8838a;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s, border-color .18s, color .18s;
+}
+
+.gal-refresh:hover {
+  border-color: #f4c0d1;
+  color: #d47b7b;
+}
+
+.gal-refresh:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
 /* 拿不到最新列表时的提示 */
 .gal-stale {
   margin: -6px 0 14px;
@@ -280,6 +310,12 @@
   color: #e5a0a0 !important;
 }
 
+[data-theme='dark'] .gal-refresh {
+  background: #1f1f1f;
+  border-color: #2f2f2f;
+  color: #a8838a;
+}
+
 [data-theme='dark'] .gal-item {
   background: #1f1f1f;
   border-color: #2f2f2f;
@@ -333,6 +369,13 @@
     gap: 8px;
   }
   .gal-add {
+    text-align: center;
+  }
+  .gal-tools {
+    width: 100%;
+  }
+  .gal-add {
+    flex: 1;
     text-align: center;
   }
   .gal-item {
